@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AntStats.Xamarin.SettingsW"
+             Background="#1e2124"
+             >
+             
+             
+
+<Grid >
+    
+    <StackLayout  Margin="10" >
+
+        
+
+        <Grid  Margin="0,0,0,0">
+
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions >
+
+            <Entry Grid.Column="0"  
+                   Margin="0,0,10,0"
+                   Placeholder="Password" 
+                   x:Name="Tpassword"
+                   TextColor="Azure"
+                   PlaceholderColor="Gray"
+                   />
+
+            <Entry Grid.Column="1"  
+                   Margin="0,0,10,0"
+                   x:Name="Tuser"
+                   Placeholder="User" 
+                   TextColor="Azure"
+                   PlaceholderColor="Gray"
+                   />
+
+            <Entry Grid.Column="2"   
+                   x:Name="Tip"
+                   Placeholder="Ip Address" 
+                   TextColor="Azure"
+                   PlaceholderColor="Gray"
+                   />
+        </Grid >
+
+        <Grid x:Name="MysqlSettings0" Margin="0,25,0,25">
+
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions >
+
+            <Entry Grid.Column="0"  
+                   Margin="0,0,10,0"
+                   Placeholder="Pswd MysSql" 
+                   x:Name="MysqlTpassword"
+                   TextColor="Azure"
+                   PlaceholderColor="Gray"
+                   />
+
+            <Entry Grid.Column="1"  
+                   Margin="0,0,10,0"
+                   x:Name="MysqlTuser"
+                   Placeholder="User MySql"
+                   TextColor="Azure"
+                   PlaceholderColor="Gray"
+                   />
+
+            <Entry Grid.Column="2"   
+                   x:Name="MysqlTip"
+                   Placeholder="Address MySql" 
+                   TextColor="Azure"
+                   PlaceholderColor="Gray"
+            />
+            
+        </Grid >
+
+
+
+        <Grid x:Name="MysqlSettings1" Margin="0,0,0,0">
+
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions >
+
+            <Entry Grid.Column="0"   
+                   Margin="0,0,10,0"
+                   x:Name="TnameTable"
+                   Placeholder="Name Table" 
+                   TextColor="Azure"
+                   PlaceholderColor="Gray"
+                   />
+
+            <Entry Grid.Column="1"
+                   Margin="0,0,10,0"
+                   x:Name="TDataBase"
+                   Placeholder="DataBase" 
+                   TextColor="Azure"
+                   PlaceholderColor="Gray"
+                   />
+
+            <Entry Grid.Column="2"  
+                   x:Name="Tport"
+                   Placeholder="Port" 
+                   TextColor="Azure"
+                   PlaceholderColor="Gray"
+                   />
+
+
+        </Grid >
+        
+        
+        <Grid x:Name="GridAutoUpdate" IsVisible="False">
+            <Label x:Name="AutoUpdateLabel"  TextColor="Azure"  Text="{Binding Source={x:Reference AutoUpdateSlider},
+            Path=Value,StringFormat='{0:F0}M'}" Grid.Row="0"></Label>
+            <Slider
+                x:Name="AutoUpdateSlider"
+                ThumbColor="Azure"
+                Maximum="60"
+                Minimum="1"
+                Margin="20,0,0,0"
+                Grid.Row="0"
+            />
+    
+        </Grid>
+
+    
+    </StackLayout>
+
+
+
+        <StackLayout VerticalOptions="End" >
+            
+            <Grid IsVisible="False" x:Name="GridCreatingTable" Margin="0,0,0,40">
+            
+                <Label Text="Creating Table" HorizontalOptions="Center" x:Name="CreatingTableLabel" Grid.Row="0"></Label>
+                <ProgressBar
+                    x:Name="CreatingTableProgressBar"
+                    ProgressColor="Azure"
+                    Margin="20,0,20,0"
+                    Progress="{Binding ProgressBar}"
+                    Grid.Row="1"
+                   
+                />
+    
+            </Grid>
+            
+            
+            
+            <Grid VerticalOptions="End"   Margin="10,0,10,0">
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions >
+
+
+
+            
+
+                <Label   
+                    VerticalOptions="Center"
+                    Grid.Column="0" 
+                    Text="Auto Update" 
+                    Margin="40,0,0,0"
+                    TextColor="Azure"
+                  
+                    />
+                <CheckBox  
+                    x:Name="AutoUpdate"
+                    Grid.Column="0"
+                    CheckedChanged="AutoUpdate_OnCheckedChanged"
+                    Color="Azure"
+                />
+
+
+                <Label   
+                    VerticalOptions="Center"
+                    Grid.Column="1" 
+                    Text="Get DB" 
+                     Margin="40,0,0,0"
+                    TextColor="Azure"
+                    />
+                <CheckBox  
+                    x:Name="ToggleSwitchMySql"
+                    Grid.Column="1"
+                    CheckedChanged="ToggleSwitchMySql_OnCheckedChanged"
+                    Color="Azure"
+                  />
+
+
+                <Label   
+                    VerticalOptions="Center"
+                      Grid.Column="2" 
+                    Text="On Server" 
+                    Margin="40,0,0,0"
+                    TextColor="Azure"
+                    />
+                <CheckBox  
+                    x:Name="ToggleSwitchServer"
+                    Grid.Column="2"
+                    CheckedChanged="ToggleSwitchServer_OnCheckedChanged"
+                    Color="Azure"
+                />
+
+
+
+            </Grid >
+
+
+
+            <Grid VerticalOptions="End" >
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition />
+                    
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions >
+
+
+                <Button        
+                    TextColor="Black"
+                    x:Name="ButtonTable"
+                    Clicked="ButtonTable_OnClicked"
+                    BackgroundColor="Silver"
+                    Grid.Column="0" Text="Сreate table"
+                    Margin="10"
+                    CornerRadius="8"
+                ></Button>
+
+
+
+
+                <Button        
+                    TextColor="Black"
+                    x:Name="ButtonSave" 
+                    Grid.Column="1" Text="Save"
+                    Margin="10"
+                    BackgroundColor="Silver"
+                    Clicked="ButtonSave_Clicked"
+                    CornerRadius="8"
+                    ></Button>
+
+
+
+
+
+            </Grid >
+        </StackLayout>
+
+
+
+    </Grid>
+    
+    
+
+</ContentPage>

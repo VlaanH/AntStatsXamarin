@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AntStats.Xamarin.Stats"
+             Background="#1e2124"
+             >
+
+
+
+
+    <Grid x:Name="MainW" >
+
+
+        <Grid.RowDefinitions >
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions >
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions >
+
+
+
+
+
+        <Label x:Name="ProgressLabel" Grid.Row="10" Grid.Column="0" 
+               Text="AntStats Xamarin"
+               VerticalTextAlignment="Center"
+               HorizontalTextAlignment="Center"
+               FontSize="14"
+               Margin="10"
+               TextColor="Azure"
+               
+        ></Label>
+        <ProgressBar Grid.Row="10" Grid.Column="0" 
+            x:Name="DatabaseProgressBar"
+            ProgressColor="DeepSkyBlue"
+            Margin="20,0,20,0"
+            Progress="{Binding ProgressBar}"
+            IsVisible="False"
+        />
+        
+
+       
+
+        <Label Grid.Row="0" Grid.Column="0" 
+               Text="Chain#"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="15"
+               Margin="2"
+               TextColor="Azure"
+        ></Label>
+        <Label Grid.Row="0" Grid.Column="1" 
+               Text="Temp"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="15"
+               Margin="2"
+               TextColor="Azure"
+        ></Label>
+
+        
+        <Label Grid.Row="0" Grid.Column="2" 
+               Text="HW"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="15"
+               Margin="2"
+               TextColor="Azure"
+        ></Label>
+
+        <Label Grid.Row="0" Grid.Column="3" 
+               Text="GH/S(RT)"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="15"
+               Margin="2"
+               TextColor="Azure"
+        ></Label>
+        
+        
+     <Button           
+            VerticalOptions="End"
+            x:Name="ButtonStats" 
+            Margin="10"
+            Grid.Row="10" Grid.Column="1"  
+            Text="GET"
+            Clicked="Button_Clicked"
+            BackgroundColor="Gray"
+            CornerRadius="8"
+            TextColor="White"
+            Grid.ColumnSpan="2"
+        ></Button>
+        
+   
+
+
+  
+
+        <Button           
+            VerticalOptions="End"
+            x:Name="ButtonSettings" 
+            Margin="10"
+            Grid.Row="10" Grid.Column="3"  
+            Text="Settings"
+            Clicked="ButtonSettings_Clicked"
+            BackgroundColor="Gray"
+            CornerRadius="8"
+            TextColor="White"
+        ></Button>
+
+    </Grid>
+    
+    
+</ContentPage>
