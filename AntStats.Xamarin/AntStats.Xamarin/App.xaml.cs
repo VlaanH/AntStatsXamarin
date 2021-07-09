@@ -1,6 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 
 namespace AntStats.Xamarin
@@ -9,8 +7,6 @@ namespace AntStats.Xamarin
     {
         public App()
         {
-     
-
 
             InitializeComponent();
             

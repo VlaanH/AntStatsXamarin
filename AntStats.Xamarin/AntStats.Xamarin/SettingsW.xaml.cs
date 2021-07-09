@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using AntStats.Xamarin;
-using AntStats.Xamarin;
 using AntStatsCore;
 using AntStatsCore.Database;
-using MySqlConnector;
 
 namespace AntStats.Xamarin
 {
