@@ -264,8 +264,7 @@ namespace AntStats.Xamarin
                     
                     for (int i = 0; i < int.Parse(settings.AutoUpdateValue)*60 & ButtonSettings.IsEnabled==false; i++)
                     {
-                        
-                        ButtonStats.Text = "Stop"+(int.Parse(settings.AutoUpdateValue)*60-i)+"s";
+                        ButtonStats.Text = "Stop"+(Convert.ToInt32(settings.AutoUpdateValue)*60-i)+"s";
                         
                         await Task.Delay(1000);
                     }

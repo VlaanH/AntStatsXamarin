@@ -111,7 +111,7 @@ namespace AntStats.Xamarin
             settings.DatabaseIP = MysqlTip.Text;
 
             
-            settings.AutoUpdateValue = AutoUpdateSlider.Value.ToString();
+            settings.AutoUpdateValue = Convert.ToInt32(AutoUpdateSlider.Value).ToString() ;
 
             settings.AutoUpdate = AutoUpdate.IsChecked;
             
