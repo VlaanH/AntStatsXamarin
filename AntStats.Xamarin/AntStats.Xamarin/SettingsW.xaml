@@ -27,6 +27,7 @@
                    x:Name="Tpassword"
                    TextColor="Azure"
                    PlaceholderColor="Gray"
+                   IsPassword="True"
                    />
 
             <Entry Grid.Column="1"  
