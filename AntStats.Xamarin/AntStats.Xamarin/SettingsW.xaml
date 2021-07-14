@@ -46,7 +46,7 @@
                    />
         </Grid >
 
-        <Grid x:Name="MysqlSettings0" Margin="0,25,0,25">
+        <Grid Margin="0,25,0,25">
 
             <Grid.ColumnDefinitions >
                 <ColumnDefinition />
@@ -81,7 +81,7 @@
 
 
 
-        <Grid x:Name="MysqlSettings1" Margin="0,0,0,0">
+        <Grid Margin="0,0,0,0">
 
             <Grid.ColumnDefinitions >
                 <ColumnDefinition />

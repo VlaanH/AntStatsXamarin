@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace AntStats.Xamarin
+namespace AntStats.Xamarin.Column
 {
     public static class ColumnList
     {

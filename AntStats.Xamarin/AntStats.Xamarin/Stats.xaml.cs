@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using AntStats.Xamarin.Column;
 using Xamarin.Forms;
 using AntStatsCore;
 using AntStatsCore.Database;
@@ -32,7 +33,7 @@ namespace AntStats.Xamarin
             for (int i = 1; i < 10; i++)
             {
                 
-                var label = CustomItem.AddLabel(columnName + i);
+                var label = CustomItem.CustomItem.AddLabel(columnName + i);
                 MainW.Children.Add(label);
                 Grid.SetColumn(label, columnId);
                 Grid.SetRow(label, i);
@@ -247,8 +248,6 @@ namespace AntStats.Xamarin
                 {
                     ButtonSettings.IsEnabled = false;
                     ButtonStats.Text = "Stop";
-
-
                 }
                 else
                 {
@@ -288,9 +287,7 @@ namespace AntStats.Xamarin
             pg.Title = "Settings AntStats Xamarin";
             pg.BarBackgroundColor= Color.Aqua;
        
-            await Navigation.PushAsync(pg); 
-
-         
+            await Navigation.PushAsync(pg);
         }
         
         

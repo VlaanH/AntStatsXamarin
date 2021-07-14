@@ -1,8 +1,8 @@
 using Xamarin.Forms;
 
-namespace AntStats.Xamarin
+namespace AntStats.Xamarin.CustomItem
 {
-    public class CustomItem
+    public static class CustomItem
     {
         public static Label AddLabel(string nameLabel)
         {

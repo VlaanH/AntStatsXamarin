@@ -18,10 +18,10 @@ namespace AntStats.Xamarin
 
             NavigationPage.SetHasNavigationBar(this, false);
       
-            LoaudingSettings();
+            LoadingSettings();
         }
 
-        async void LoaudingSettings()
+        async void LoadingSettings()
         {
             await Task.Delay(300);
             var settings = await Settings.Get(XamarinPatch);
@@ -74,14 +74,12 @@ namespace AntStats.Xamarin
             {
                 ToggleSwitchMySql.IsChecked = settings.DataBase;
 
-
             }
 
             if (settings.Server != null)
             {
                 ToggleSwitchServer.IsChecked = settings.Server;
 
-                
             }
             
         }
@@ -124,15 +122,13 @@ namespace AntStats.Xamarin
 
 
 
-        async private void ButtonSave_Clicked(object sender, EventArgs e)
+        private void ButtonSave_Clicked(object sender, EventArgs e)
         {
             
             var settings = GetSetting();
 
 
             Settings.Save(settings,XamarinPatch);
-
-          
         }
 
         
@@ -243,9 +239,7 @@ namespace AntStats.Xamarin
         private void ToggleSwitchMySql_OnCheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             if (ToggleSwitchMySql.IsChecked==true)
-                ToggleSwitchServer.IsChecked = false;   
-        
-
+                ToggleSwitchServer.IsChecked = false;
         }
         
         #region INotifyPropertyChanged

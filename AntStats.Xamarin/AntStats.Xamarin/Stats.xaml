@@ -42,7 +42,6 @@
                FontSize="14"
                Margin="10"
                TextColor="Azure"
-               
         ></Label>
         <ProgressBar Grid.Row="10" Grid.Column="0" 
             x:Name="DatabaseProgressBar"
