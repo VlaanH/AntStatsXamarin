@@ -59,22 +59,56 @@ namespace AntStats.Xamarin
             ColumnList.Chain = ColumnAdd("Chain", 0);
 
         }
-        private void SetAsicColumnTable(AsicStandardStatsObject convertAsicColumn)
+
+        private void SetAsicColumnTable(AsicStandardStatsObject asicColumn)
         {
-
-            for (int i = 0; i < convertAsicColumn.LasicAsicColumnStats.Count ; i++)
+            string contentDefault = "-";
+            int maxI = 9;
+            for (int i = 0; i < maxI; i++)
             {
-                ColumnList.GHRT[i].Text = convertAsicColumn.LasicAsicColumnStats[i].GHRT;
-                    
-                ColumnList.TempChip[i].Text = convertAsicColumn.LasicAsicColumnStats[i].TempChip;
 
-                ColumnList.HW[i].Text = convertAsicColumn.LasicAsicColumnStats[i].HW;
+                try
+                {
+                    if (asicColumn.LasicAsicColumnStats[i].TempChip != null)
+                        ColumnList.TempChip[i].Text = asicColumn.LasicAsicColumnStats[i].TempChip;
+                }
+                catch (Exception e)
+                {
+                    ColumnList.TempChip[i].Text = contentDefault;
+                }
 
-                ColumnList.Chain[i].Text = convertAsicColumn.LasicAsicColumnStats[i].Chain;
+                try
+                {
+                    if (asicColumn.LasicAsicColumnStats[i].HW != null)
+                        ColumnList.HW[i].Text = asicColumn.LasicAsicColumnStats[i].HW;
+                }
+                catch (Exception e)
+                {
+                    ColumnList.HW[i].Text = contentDefault;
+                }
+
+                try
+                {
+                    if (asicColumn.LasicAsicColumnStats[i].GHRT != null)
+                        ColumnList.GHRT[i].Text = asicColumn.LasicAsicColumnStats[i].GHRT;
+                }
+                catch (Exception e)
+                {
+                    ColumnList.GHRT[i].Text = contentDefault;
+                }
+                
+                try
+                {
+                    if (asicColumn.LasicAsicColumnStats[i].Chain != null)
+                        ColumnList.Chain[i].Text = asicColumn.LasicAsicColumnStats[i].Chain;
+                }
+                catch (Exception e)
+                {
+                    ColumnList.Chain[i].Text = contentDefault;
+                }
             }
-
         }
-       
+
 
 
         private bool _errors = false;
