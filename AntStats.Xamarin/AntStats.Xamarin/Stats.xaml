@@ -94,7 +94,7 @@
      <Button           
             VerticalOptions="End"
             x:Name="ButtonStats" 
-            Margin="10"
+            Margin="5"
             Grid.Row="10" Grid.Column="1"  
             Text="GET"
             Clicked="Button_Clicked"
@@ -112,7 +112,7 @@
         <Button           
             VerticalOptions="End"
             x:Name="ButtonSettings" 
-            Margin="10"
+            Margin="5"
             Grid.Row="10" Grid.Column="3"  
             Text="Settings"
             Clicked="ButtonSettings_Clicked"
