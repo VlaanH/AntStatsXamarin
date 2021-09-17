@@ -10,7 +10,7 @@ namespace AntStats.Xamarin
 {
     public partial class SettingsW : ContentPage,INotifyPropertyChanged
     {
-        private static string XamarinPatch = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private static string XamarinPatch = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+"/";
         public SettingsW()
         {
             InitializeComponent();
@@ -24,7 +24,7 @@ namespace AntStats.Xamarin
         async void LoadingSettings()
         {
             await Task.Delay(300);
-            var settings = await Settings.Get(XamarinPatch);
+            var settings = await Settings.Get("settings",XamarinPatch);
 
        
             SetSetting(settings);
@@ -89,6 +89,8 @@ namespace AntStats.Xamarin
         {
             SettingsData settings = new SettingsData();
 
+            Console.WriteLine(XamarinPatch);
+            
             settings.IP = Tip.Text;
             
             settings.User = Tuser.Text;
@@ -126,7 +128,7 @@ namespace AntStats.Xamarin
         {
             
             var settings = GetSetting();
-
+            settings.NameProfile = "settings";
 
             Settings.Save(settings,XamarinPatch);
         }
@@ -217,9 +219,9 @@ namespace AntStats.Xamarin
                 ShowError("DataBase Error");
             }
 
-           
-            
-            
+
+
+            settingsClass.NameProfile = "settings";
             Settings.Save(settingsClass,XamarinPatch);
             
             

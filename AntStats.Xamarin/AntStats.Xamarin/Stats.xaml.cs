@@ -178,7 +178,7 @@ namespace AntStats.Xamarin
             
             
                await Task.Run(() =>
-               {  settings = Settings.Get(XamarinPatch).Result; });
+               {  settings = Settings.Get("settings",XamarinPatch).Result; });
 
       
                
@@ -274,7 +274,7 @@ namespace AntStats.Xamarin
         {
             SettingsData settings = new SettingsData();
             await Task.Run(() =>
-                {  settings = Settings.Get(XamarinPatch).Result; });
+                {  settings = Settings.Get("settings",XamarinPatch).Result; });
 
             if (settings.AutoUpdate == true | ButtonSettings.IsEnabled==false)
             {
