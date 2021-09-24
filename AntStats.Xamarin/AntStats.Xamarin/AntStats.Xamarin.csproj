@@ -17,6 +17,7 @@
 
     <ItemGroup>
       <Folder Include="Column" />
+      <Folder Include="Profile" />
     </ItemGroup>
 
     <ItemGroup>
