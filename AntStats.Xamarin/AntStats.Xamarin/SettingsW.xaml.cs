@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using AntStats.Xamarin.Profile;
 using Xamarin.Forms;
 using AntStatsCore;
 using AntStatsCore.Database;
@@ -23,51 +25,212 @@ namespace AntStats.Xamarin
 
         async void LoadingSettings()
         {
-            await Task.Delay(300);
-            var settings = await Settings.Get("settings",XamarinPatch);
+            ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings = new List<ProfileXamarinObj>();
+            try
+            {
+                AddingExistingSettingsProfiles();
+               
+                var profiles= await Settings.GetProfiles(XamarinPatch);
 
-       
-            SetSetting(settings);
+
+
+                if (profiles.Count==0)
+                {
+                    SettingsData settingsData = new SettingsData();
+                    
+                    settingsData.NameProfile = ProfileManagement.GetRandomProfileName();
+                    
+                    
+                    
+                    SetSetting(settingsData);
+                }
+                else if (profiles.Count>0 & ProfileManagement.GlobalSelectedProfile==default)
+                {
+                    var settings = await Settings.Get(profiles[0].NameProfile,XamarinPatch);
+                    
+                    ProfileManagement.SelectProfile(ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings,profiles[0].NameProfile);
+
+                    SetSetting(settings); 
+                }
+                else
+                {
+                    var settings = await Settings.Get(ProfileManagement.GlobalSelectedProfile,XamarinPatch);
+                    
+                    ProfileManagement.SelectProfile(ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings,ProfileManagement.GlobalSelectedProfile);
+                    
+                    SetSetting(settings); 
+                }
+            }
+            catch (Exception e)
+            {
+                
+            }
         }
+        void AddProfile(string profileName,bool isEnabled)
+        {
+            
+            ProfileXamarinObj profilesuAvalonObj = new ProfileXamarinObj();
+            profilesuAvalonObj.profButton.Text = profileName;
+            profilesuAvalonObj.profButton.IsEnabled = isEnabled;
+           
 
+            
+            profilesuAvalonObj.minusButton.Text = "-";
+            profilesuAvalonObj.minusButton.WidthRequest = 30;
+           
+            
+           
+            
+            StackLayout stackLayout = new StackLayout();
+            stackLayout.Orientation = StackOrientation.Horizontal;
+            stackLayout.Spacing = 0;
+                
+            
+            stackLayout.Children.Add(profilesuAvalonObj.profButton);
+            stackLayout.Children.Add(profilesuAvalonObj.minusButton);
+
+            profilesuAvalonObj.stackLayout = stackLayout;
+            
+            ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings.Add(profilesuAvalonObj);
+        
+            stackLayout.Orientation = StackOrientation.Horizontal;
+            Profiles.Children.Add(stackLayout);
+            
+            
+            
+            profilesuAvalonObj.minusButton.Clicked += (s, e) =>
+            { 
+               
+                Profiles.Children.Remove(stackLayout);
+                
+                Settings.DeleteSettingsProfile(profileName,XamarinPatch);
+                
+            };
+            
+            
+            profilesuAvalonObj.profButton.Clicked += async (s, e) =>
+            {
+                
+                ProfileManagement.SelectProfile(ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings,profileName);
+                
+
+                profilesuAvalonObj.profButton.IsEnabled = false;
+                
+                
+                var settings = await Settings.Get(profileName,XamarinPatch);
+                
+                SetSetting(settings); 
+                
+            };
+        }
+        
+        
+        private async void AddingExistingSettingsProfiles()
+        {
+            var profiles = await Settings.GetProfiles(XamarinPatch);
+            if (profiles!=default)
+            {
+                for (int i = 0; i < profiles.Count; i++)
+                {
+                    bool enable = profiles[i].NameProfile!=ProfileManagement.GlobalSelectedProfile;
+
+
+                    AddProfile(profiles[i].NameProfile,enable);
+                
+                }
+                //selection of the first profile in the list if no profile is selected
+                if (ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings.Count > 0 & ProfileManagement.GlobalSelectedProfile == default)
+                {
+                
+                    ProfileManagement.SelectProfile(ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings,(string)ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings[0].profButton.Text);
+                    ProfileManagement.GlobalSelectedProfile = (string) ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings[0].profButton.Text;
+                }
+            }
+            
+
+        }
+        
+        
         void SetSetting(SettingsData settings)
         {
+            
+            if (settings.NameProfile != null)
+                NameProfileEntry.Text = settings.NameProfile;
+            else
+                NameProfileEntry.Text = default;
+
             if (settings.IP != null)
                 Tip.Text = settings.IP;
+            else
+                Tip.Text = default;
+
             if (settings.User != null)
                 Tuser.Text = settings.User;
-
-            if (settings.Pass != null)
-               Tpassword.Text = settings.Pass;
-
-            if (settings.Port != null)
-               Tport.Text = settings.Port;
-
-            if (settings.DataBaseName != null)
+            else
+                Tuser.Text = default;
+            
+            if(settings.Pass!=null)
+             Tpassword.Text = settings.Pass;
+            else
+                Tpassword.Text = default;
+            
+            if(settings.Port!=null)
+                Tport.Text = settings.Port;
+            else
+                Tport.Text = default;
+            
+            
+            if(settings.DataBaseName!=null)
                 TDataBase.Text = settings.DataBaseName;
-
-            if (settings.NameTable != null)
+            else
+                TDataBase.Text = default;
+            
+            
+            if(settings.NameTable!=null)
                 TnameTable.Text = settings.NameTable;
+            else
+                TnameTable.Text = default;
 
-            if (settings.DatabasePass != null)
+            if(settings.DatabasePass!=null)
                 MysqlTpassword.Text = settings.DatabasePass;
+            else
+                MysqlTpassword.Text = default;
+          
+            if(settings.DatabaseUser!=null)
+                MysqlTuser.Text=settings.DatabaseUser;
+            else
+                MysqlTuser.Text = default;
+                    
+            if(settings.DatabaseIP!=null)
+                MysqlTip.Text = settings.DatabaseIP  ;
+            else
+                MysqlTip.Text = default;
+            
 
-
-            if (settings.DatabaseUser != null)
-                MysqlTuser.Text = settings.DatabaseUser;
-
-            if (settings.DatabaseIP != null)
-                MysqlTip.Text = settings.DatabaseIP;
-
-
-            if (settings.AutoUpdate != null  )
+            if (settings.AutoUpdate != null & settings.AutoUpdateValue!=null)
             {
                 AutoUpdate.IsChecked = settings.AutoUpdate;
-                if (settings.AutoUpdateValue!=null)
+                if (AutoUpdate.IsChecked==true)
+                {
+                    GridAutoUpdate.IsVisible = true;
+                    AutoUpdateSlider.IsVisible = true;
                     AutoUpdateSlider.Value = double.Parse(settings.AutoUpdateValue);
 
-            }
+                }
+                else
+                {
 
+                    AutoUpdate.IsChecked = false;
+                    GridAutoUpdate.IsVisible = false;
+                    
+                }
+            }
+            else
+            {   AutoUpdate.IsChecked = false;
+                GridAutoUpdate.IsVisible = false;
+                
+            }
+                
 
 
             if (settings.DataBase != null)
@@ -78,9 +241,10 @@ namespace AntStats.Xamarin
 
             if (settings.Server != null)
             {
-                ToggleSwitchServer.IsChecked = settings.Server;
+                ToggleSwitchServer.IsChecked=settings.Server;
 
             }
+
             
         }
 
@@ -97,6 +261,7 @@ namespace AntStats.Xamarin
 
             settings.Pass = Tpassword.Text;
 
+            settings.NameProfile = NameProfileEntry.Text;
             
             settings.Port = Tport.Text;
 
@@ -128,7 +293,7 @@ namespace AntStats.Xamarin
         {
             
             var settings = GetSetting();
-            settings.NameProfile = "settings";
+            settings.NameProfile = NameProfileEntry.Text;
 
             Settings.Save(settings,XamarinPatch);
         }

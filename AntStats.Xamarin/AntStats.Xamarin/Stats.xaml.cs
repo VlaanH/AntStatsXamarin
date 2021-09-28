@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using AntStats.Xamarin.Column;
+using AntStats.Xamarin.Profile;
 using Xamarin.Forms;
 using AntStatsCore;
 using AntStatsCore.Database;
@@ -13,7 +14,7 @@ namespace AntStats.Xamarin
    
     public partial class Stats : ContentPage,INotifyPropertyChanged
     {
-        private static string XamarinPatch = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        private static string XamarinPatch = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)+"/";
         public Stats()
         {
             InitializeComponent();
@@ -178,7 +179,7 @@ namespace AntStats.Xamarin
             
             
                await Task.Run(() =>
-               {  settings = Settings.Get("settings",XamarinPatch).Result; });
+               {  settings = Settings.Get(ProfileManagement.GlobalSelectedProfile,XamarinPatch).Result; });
 
       
                
@@ -274,7 +275,7 @@ namespace AntStats.Xamarin
         {
             SettingsData settings = new SettingsData();
             await Task.Run(() =>
-                {  settings = Settings.Get("settings",XamarinPatch).Result; });
+                {  settings = Settings.Get(ProfileManagement.GlobalSelectedProfile,XamarinPatch).Result; });
 
             if (settings.AutoUpdate == true | ButtonSettings.IsEnabled==false)
             {

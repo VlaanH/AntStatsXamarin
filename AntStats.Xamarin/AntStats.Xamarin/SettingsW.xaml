@@ -11,7 +11,15 @@
     
     <StackLayout  Margin="10" >
 
-        
+        <Entry 
+               Margin="0,0,10,0"
+               x:Name="NameProfileEntry"
+               Placeholder="Name Profile" 
+               TextColor="Azure"
+               PlaceholderColor="Silver"
+               HorizontalTextAlignment="Center"
+               MaxLength="5"
+        />
 
         <Grid  Margin="0,0,0,0">
 
@@ -137,9 +145,11 @@
 
         <StackLayout VerticalOptions="End" >
             
+            
+            
             <Grid IsVisible="False" x:Name="GridCreatingTable" Margin="0,0,0,40">
             
-                <Label Text="Creating Table" HorizontalOptions="Center" x:Name="CreatingTableLabel" Grid.Row="0"></Label>
+                <Label Text="Creating Table" TextColor="White" HorizontalOptions="Center" x:Name="CreatingTableLabel" Grid.Row="0"></Label>
                 <ProgressBar
                     x:Name="CreatingTableProgressBar"
                     ProgressColor="Azure"
@@ -150,6 +160,15 @@
                 />
     
             </Grid>
+            <Label Text=""/>
+            <ScrollView Orientation="Horizontal" >
+                <StackLayout x:Name="Profiles" Orientation="Horizontal" Spacing="2">
+                    
+                    
+                    
+                </StackLayout>
+                
+            </ScrollView>
             
             
             
@@ -220,7 +239,6 @@
 
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition />
-                    
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions >
 
