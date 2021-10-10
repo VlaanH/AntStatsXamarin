@@ -125,31 +125,16 @@ namespace AntStats.Xamarin
         }
         
         
-        private async void AddingExistingSettingsProfiles()
-        {
-            var profiles = await Settings.GetProfiles(XamarinPatch);
-            if (profiles!=default)
-            {
-                for (int i = 0; i < profiles.Count; i++)
-                {
-                    bool enable = profiles[i].NameProfile!=ProfileManagement.GlobalSelectedProfile;
-
-
-                    AddProfile(profiles[i].NameProfile,enable);
-                
-                }
-                //selection of the first profile in the list if no profile is selected
-                if (ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings.Count > 0 & ProfileManagement.GlobalSelectedProfile == default)
-                {
-                
-                    ProfileManagement.SelectProfile(ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings,(string)ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings[0].profButton.Text);
-                    ProfileManagement.GlobalSelectedProfile = (string) ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings[0].profButton.Text;
-                }
-            }
+     
+        private void ButtonAddProfile_OnClick(object sender, EventArgs e)
+        { 
+            SettingsData settingsData = new SettingsData();
             
-
+            SetSetting(settingsData);
+           
+            NameProfileEntry.Text = "P"+new Random().Next(0,2000);
+          
         }
-        
         
         void SetSetting(SettingsData settings)
         {
@@ -288,14 +273,55 @@ namespace AntStats.Xamarin
         }
 
 
+        private void RemoveSettingsProfiles()
+        {
+            for (int i = 0; i <  ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings.Count; i++)
+            {
+                Profiles.Children.Remove(ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings[i].stackLayout);
+            }
 
+            ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings = new List<ProfileXamarinObj>();
+
+        }
+        
+        private async void AddingExistingSettingsProfiles()
+        {
+            var profiles = await Settings.GetProfiles(XamarinPatch);
+            if (profiles!=default)
+            {
+                for (int i = 0; i < profiles.Count; i++)
+                {
+                    bool enable = profiles[i].NameProfile!=ProfileManagement.GlobalSelectedProfile;
+
+
+                    AddProfile(profiles[i].NameProfile,enable);
+                
+                }
+                //selection of the first profile in the list if no profile is selected
+                if (ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings.Count > 0 & ProfileManagement.GlobalSelectedProfile == default)
+                {
+                
+                    ProfileManagement.SelectProfile(ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings,(string)ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings[0].profButton.Text);
+                    ProfileManagement.GlobalSelectedProfile = (string) ProfilesAvaloniaObjList.ListProfilesuAvalonObj_Settings[0].profButton.Text;
+                }
+            }
+            
+
+        }
+        
         private void ButtonSave_Clicked(object sender, EventArgs e)
         {
             
             var settings = GetSetting();
             settings.NameProfile = NameProfileEntry.Text;
 
-            Settings.Save(settings,XamarinPatch);
+            Settings.Save(settings,XamarinPatch); 
+            
+            RemoveSettingsProfiles();
+            AddingExistingSettingsProfiles();
+            
+            
+            
         }
 
         
@@ -386,7 +412,7 @@ namespace AntStats.Xamarin
 
 
 
-            settingsClass.NameProfile = "settings";
+            settingsClass.NameProfile = ProfileManagement.GlobalSelectedProfile;
             Settings.Save(settingsClass,XamarinPatch);
             
             
@@ -421,6 +447,7 @@ namespace AntStats.Xamarin
         }
 
         #endregion
-        
+
+      
     }
 }

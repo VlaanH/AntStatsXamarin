@@ -160,13 +160,30 @@
                 />
     
             </Grid>
-            <Label Text=""/>
-            <ScrollView Orientation="Horizontal" >
-                <StackLayout x:Name="Profiles" Orientation="Horizontal" Spacing="2">
+            
+            
+            <Label Text="Profiles" HorizontalTextAlignment="Center" FontSize="15" TextColor="White"/>
+            <ScrollView Orientation="Horizontal" Margin="0,5,0,5">
+                
+                <StackLayout  Orientation="Horizontal" Spacing="2">
+                    <StackLayout  x:Name="Profiles" Orientation="Horizontal" Spacing="2">
+                    
+                    
+                    
+                    </StackLayout>
+                    
+                    <Button 
+                        x:Name="UpdatingTheListOfExistingProfiles"
+                        Clicked="ButtonAddProfile_OnClick"
+                        FontSize="15"
+                        Text="+"
+                    ></Button>
+                        
                     
                     
                     
                 </StackLayout>
+              
                 
             </ScrollView>
             
